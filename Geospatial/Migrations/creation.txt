@@ -1,0 +1,25 @@
+curl -XPUT http://localhost:9200/listings?pretty=true -d '
+{
+    "settings" : {
+        "index" : {
+            "number_of_shards" : 5,
+            "number_of_replicas" : 0
+        }
+    }
+}
+'
+
+curl -XPUT http://localhost:9200/listings/_mapping/route?pretty=true -d '
+{
+    "route" : {
+        "properties" : {
+            "listing_id" : { "type" : "string" },
+            "location" : { "type" : "geo_point" },
+            "created_on" : {
+                "type" : "date",
+                "format" : "date_time"
+            }
+        }
+    }
+}
+'
