@@ -52,7 +52,7 @@ def move_towards(point_1, point_2, distance):
         math.cos(angle_distance) - math.sin(lat1) * math.sin(lat2)
     )
 
-    if numpy.isnan(lat2) or numpy.isnan(lng2):
+    if lat2.real is False or lng2.real is False:
         return None
 
     return math.degrees(lat2), math.degrees(lng2)
@@ -105,7 +105,7 @@ def move_along_path(points, distance, index=0):
     :return:
     """
 
-    if index < len(points):
+    if index < len(points) - 1:
         """
         There is still at least one point further from this point.
         Get the distance from this point to the next point
