@@ -6,6 +6,7 @@ import pprint
 from GeoMath import *
 from Utils import *
 from pprint import pprint
+from config import config
 
 """
 This file grabs encoded polylines from our database and segments them
@@ -23,9 +24,9 @@ anything. The following is the meter equivalent of 15 miles
 """
 
 
-engine = create_engine('mysql://homestead:secret@localhost:443/homestead')
+engine = create_engine('mysql://' + config['database']['username'] + ':' + config['database']['password'] + '@' + config['database']['host'] + ':' + config['database']['port'] + '/' + config['database']['database'])
 connection = engine.connect()
-es = Elasticsearch(['192.168.10.10'])
+es = Elasticsearch([config['elasticsearch']['host']])
 index = "listings"
 doc_type = "route"
 """
