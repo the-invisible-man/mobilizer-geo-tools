@@ -1,12 +1,11 @@
 import math
 import numbers
-import numpy
 
 __author__      = "Carlos Granados"
 __copyright__   = "Polivet.org"
 __credits__     = ["Carlos Granados"]
 
-__license__     = "PSL"
+__license__     = "Polivet Software License"
 __version__     = "0.0.1"
 
 """
@@ -80,6 +79,7 @@ def get_polyline_length(points):
 
 def km_to(point_1, point_2):
     """
+    Distance from point 1 to point 2 in kilometers
     :param point_1: tuple
     :param point_2: tuple
     :return:
@@ -104,15 +104,14 @@ def move_along_path(points, distance, index=0):
     :param index: int
     :return:
     """
-
     if index < len(points) - 1:
         """
         There is still at least one point further from this point.
         Get the distance from this point to the next point
         """
-        distanceToNextPoint = km_to(points[index], points[index + 1])
+        distance_to_next_point = km_to(points[index], points[index + 1])
 
-        if distance <= distanceToNextPoint:
+        if distance <= distance_to_next_point:
             """
             distanceToNextPoint is within this point and the next.
             Return the destination point with moveTowards().
@@ -123,7 +122,7 @@ def move_along_path(points, distance, index=0):
             The destination is further from the next point. Subtract
             distanceToNextPoint from distance and continue recursively.
             """
-            return move_along_path(points, distance - distanceToNextPoint, index + 1)
+            return move_along_path(points, distance - distance_to_next_point, index + 1)
     else:
         """
         There are no further points. The distance exceeds the length

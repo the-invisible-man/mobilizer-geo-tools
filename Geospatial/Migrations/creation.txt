@@ -5,19 +5,49 @@ curl -XPUT http://localhost:9200/listings?pretty=true -d '
             "number_of_shards" : 5,
             "number_of_replicas" : 0
         }
+    },
+"mappings”: {
+        "route" : {
+            "properties" : {
+                "listing_id" : {
+                    "type" : "string",
+                    "fields" : {
+                        "raw" : {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        }
+                    }
+                 },
+                "location" : { "type" : "geo_point" },
+                "created_on" : {
+                    "type" : "date",
+                    "format" : "date_time"
+                }
+            }
+        }
     }
 }
 '
 
 curl -XPUT http://localhost:9200/listings/_mapping/route?pretty=true -d '
 {
-    "route" : {
-        "properties" : {
-            "listing_id" : { "type" : "string" },
-            "location" : { "type" : "geo_point" },
-            "created_on" : {
-                "type" : "date",
-                "format" : "date_time"
+"mappings”: {
+        "route" : {
+            "properties" : {
+                "listing_id" : {
+                    "type" : "string",
+                    "fields" : {
+                        "raw" : {
+                            "type": "string",
+                            "index": "not_analyzed"
+                        }
+                    }
+                 },
+                "location" : { "type" : "geo_point" },
+                "created_on" : {
+                    "type" : "date",
+                    "format" : "date_time"
+                }
             }
         }
     }
